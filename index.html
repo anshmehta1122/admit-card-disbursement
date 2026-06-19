@@ -1,0 +1,904 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S.D. PUBLIC SCHOOL Admit Card System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#f2f5fa;
+      padding:40px 20px;
+      color:#222;
+    }
+
+    
+    .container{
+      max-width:1100px;
+      margin:auto;
+    }
+
+    .main-card{
+      background:#fff;
+      padding:35px;
+      border-radius:18px;
+      box-shadow:0 10px 35px rgba(0,0,0,0.08);
+      margin-bottom:30px;
+    }
+
+    .heading{
+      text-align:center;
+      margin-bottom:30px;
+    }
+
+    .heading h1{
+      color:#16324f;
+      font-size:32px;
+      margin-bottom:8px;
+    }
+
+    .titlemain{
+      font-size: 1.7rem;
+    }
+
+    .heading p{
+      color:#666;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+    }
+
+    label{
+      margin-bottom:8px;
+      font-size:14px;
+      font-weight:500;
+    }
+
+    input,select{
+      padding:14px;
+      border-radius:10px;
+      border:1px solid #ccd4df;
+      outline:none;
+      font-size:15px;
+    }
+
+    input:focus,
+    select:focus{
+      border-color:#16324f;
+    }
+
+    .optional-box{
+      margin-top:25px;
+      padding:20px;
+      background:#f8fbff;
+      border:1px solid #d7e0ea;
+      border-radius:12px;
+      display:none;
+    }
+
+    .optional-box h3{
+      margin-bottom:15px;
+      color:#16324f;
+    }
+
+    .checks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:15px;
+    }
+
+    .check-item{
+      background:white;
+      border:1px solid #d5dce7;
+      border-radius:10px;
+      padding:12px 18px;
+    }
+
+    .btn{
+      margin-top:30px;
+      padding:14px 28px;
+      background:#16324f;
+      border:none;
+      color:white;
+      border-radius:10px;
+      cursor:pointer;
+      font-size:16px;
+      font-weight:500;
+      
+    }
+
+    .btn:hover{
+      background:#0f2439;
+    }
+
+    #admitCard{
+      width:794px;
+      min-height:1123px;
+      background:white;
+      margin:auto;
+      padding:45px;
+      color:#000;
+      display:none;
+    }
+
+    .school-header{
+      text-align:center;
+      line-height:1.6;
+      margin-bottom:25px;
+    }
+
+    .school-header h2{
+      font-size:22px;
+      font-weight:700;
+    }
+
+    .school-header p{
+      font-size:13px;
+    }
+
+    .title{
+      font-size:18px;
+      font-weight:700;
+      margin-top:10px;
+    }
+
+    .details-area{
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      margin-top:20px;
+    }
+
+    .left-details{
+      flex:1;
+    }
+
+    .detail-line{
+      margin-bottom:14px;
+      font-size:15px;
+    }
+
+    .photo-box{
+      width:130px;
+      height:160px;
+      border:1.5px solid #000;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:12px;
+      text-align:center;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:25px;
+    }
+
+    table th,
+    table td{
+      border:1px solid #000;
+      padding:10px;
+      text-align:center;
+      font-size:14px;
+    }
+
+    table th{
+      background:#f1f1f1;
+    }
+
+    .warning{
+      margin-top:22px;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .footer{
+      margin-top:70px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+    }
+
+    .download-btn{
+      display:none;
+      margin:25px auto;
+    }
+
+    @media(max-width:900px){
+
+      #admitCard{
+        width:100%;
+        padding:25px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="main-card">
+
+    <div class="heading">
+      
+      <h1>S.D. PUBLIC SCHOOL DUPLICATE, JAGADHRI (10+2)</h1>
+      <p>Affiliated to Central Board of Secondary Education, New Delhi</p>
+      <p>Managed by <b>S.D. SABHA, JAGADHRI</b></p>
+      <p>Established under <b>S.D. INSTITUTIONS, INDIA</b></p><br>
+      <div class="titlemain"><b>Admit Card Disbursement System</b></div>
+      <p>Session : 2026-27</p>
+     
+    </div>
+
+    <div class="grid">
+
+      <div class="field">
+        <label>Student Name</label>
+        <input type="text" id="studentName">
+      </div>
+
+      <div class="field">
+        <label>Class Roll Number</label>
+        <input type="number" id="rollNumber">
+      </div>
+
+      <div class="field">
+        <label>Admission Number</label>
+        <input type="number" id="admissionNumber">
+      </div>
+
+      <div class="field">
+        <label>Phone Number</label>
+        <input type="number" id="phoneNumber">
+      </div>
+
+      <div class="field">
+        <label>Select Class</label>
+
+        <select id="studentClass" onchange="handleClass()">
+
+          <option value="">Choose</option>
+
+          <option value="1">Class 1</option>
+          <option value="2">Class 2</option>
+          <option value="3">Class 3</option>
+          <option value="4">Class 4</option>
+          <option value="5">Class 5</option>
+
+          <option value="6">Class 6</option>
+          <option value="7">Class 7</option>
+          <option value="8">Class 8</option>
+          <option value="9">Class 9</option>
+          <option value="10">Class 10</option>
+
+          <option value="11-NM">Class 11 - Non Medical</option>
+          <option value="11-COM">Class 11 - Commerce</option>
+          <option value="11-HUM">Class 11 - Humanities</option>
+
+          <option value="12-NM">Class 12 - Non Medical</option>
+          <option value="12-COM">Class 12 - Commerce</option>
+          <option value="12-HUM">Class 12 - Humanities</option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="optional-box" id="optionalBox" style="display: block;">
+
+      <h3>Select Optional Subjects</h3>
+
+      <div class="checks" id="optionalContainer">
+
+<div class="check-item">
+
+<input type="radio" value="{&quot;code&quot;:&quot;SSHMUS-11&quot;,&quot;name&quot;:&quot;HINDUSTANI MUSIC&quot;,&quot;date&quot;:&quot;09/07/26&quot;}" name="optional">
+
+HINDUSTANI MUSIC
+
+</div>
+
+
+
+<div class="check-item">
+
+<input type="radio" value="{&quot;code&quot;:&quot;SSPED-11&quot;,&quot;name&quot;:&quot;PHYSICAL EDUCATION&quot;,&quot;date&quot;:&quot;09/07/26&quot;}" name="optional">
+
+PHYSICAL EDUCATION
+
+</div>
+
+
+
+<div class="check-item">
+
+<input type="radio" value="{&quot;code&quot;:&quot;SSROB-11&quot;,&quot;name&quot;:&quot;ROBOTICS&quot;,&quot;date&quot;:&quot;09/07/26&quot;}" name="optional">
+
+ROBOTICS
+
+</div>
+
+
+
+<div class="check-item">
+
+<input type="radio" value="{&quot;code&quot;:&quot;SSAI-11&quot;,&quot;name&quot;:&quot;ARTIFICIAL INTELLIGENCE&quot;,&quot;date&quot;:&quot;09/07/26&quot;}" name="optional">
+
+ARTIFICIAL INTELLIGENCE
+
+</div>
+
+
+
+<div class="check-item">
+
+<input type="radio" value="{&quot;code&quot;:&quot;SSIPR-11&quot;,&quot;name&quot;:&quot;INFORMATION PRACTICES&quot;,&quot;date&quot;:&quot;09/07/26&quot;}" name="optional">
+
+INFORMATION PRACTICES
+
+</div>
+
+</div>
+
+    </div>
+<br>
+    <button class="btn" onclick="generateAdmitCard()">
+      Generate Admit Card
+    </button>
+
+  </div>
+
+
+  <div id="admitCard" style="display: block;">
+
+    <div class="school-header">
+
+      <h2>S.D. PUBLIC SCHOOL DUPLICATE, JAGADHRI (10+2)</h2>
+
+      <p>Affiliated to Central Board of Secondary Education, New Delhi</p>
+
+      <p>Managed by S.D. SABHA, JAGADHRI</p>
+
+      <p>Established under S.D. INSTITUTIONS, INDIA</p>
+
+      <div class="title">ADMIT CARD FOR JULY PRACTICE TEST</div>
+
+      <p>Session : 2026-27</p>
+
+    </div>
+
+    <div class="details-area">
+
+      <div class="left-details">
+
+        <div class="detail-line">
+          <b>Name of Candidate:</b>
+          <span id="printName">Vinayak</span>
+        </div>
+
+        <div class="detail-line">
+          <b>Class Roll Number:</b>
+          <span id="printRoll">1190</span>
+        </div>
+
+        <div class="detail-line">
+          <b>Admission Number:</b>
+          <span id="printAdmission">11902909</span>
+        </div>
+
+        <div class="detail-line">
+          <b>Father's Signature:</b>
+        </div><br>
+
+        <div class="detail-line">
+          <b>Phone Number:</b>
+          <span id="printPhone">989890090</span>
+        </div>
+
+        <div class="detail-line">
+          <b>Subjects Opted :</b>
+        </div>
+
+      </div>
+
+      <div class="photo-box">
+        Candidate's Photograph
+      </div>
+
+    </div>
+
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>Subject Code</th>
+          <th>Subject Name</th>
+          <th>Date of Exam</th>
+        </tr>
+
+      </thead>
+
+      <tbody id="subjectRows">
+
+<tr>
+
+<td>SSPHY-11</td>
+
+<td>PHYSICS</td>
+
+<td>04/07/26</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>SSCHEM-11</td>
+
+<td>CHEMISTRY</td>
+
+<td>05/07/26</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>SSMAT-11</td>
+
+<td>MATHEMATICS</td>
+
+<td>07/07/26</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>SSENG-11</td>
+
+<td>ENGLISH</td>
+
+<td>08/07/26</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>SSHMUS-11</td>
+
+<td>HINDUSTANI MUSIC</td>
+
+<td>09/07/26</td>
+
+</tr>
+
+</tbody>
+
+    </table><br><br>
+
+    <div class="instructions"><b>INSTRUCTIONS :</b></div>
+    <div class="warning">
+
+      Any malpractice during the examination will lead to immediate cancellation of the exam.
+
+      <br><br>
+
+      Hard Copy / Physical Admit Card is mandatory to sit in examination.
+      Kindly take print out of this Admit Card.
+
+    </div>
+
+    <div class="footer">
+      <div></div>
+      <div><b>CONTROLLER OF EXAMINATIONS</b></div>
+
+    </div>
+
+  </div>
+
+  <button class="btn download-btn" id="downloadBtn" onclick="downloadPDF()" style="display: block;">
+    Download Admit Card PDF
+  </button>
+
+</div>
+
+<script>
+
+const subjects = {
+
+"1":[
+{code:"ENG-01",name:"ENGLISH",date:"04/07/26"},
+{code:"HIN-01",name:"HINDI",date:"05/07/26"},
+{code:"EVS-01",name:"ENVIRONMENTAL STUDIES",date:"08/07/26"},
+{code:"COMP-01",name:"COMPUTER EDUCATION",date:"09/07/26"}
+],
+
+"2":[
+{code:"MAT-02",name:"MATHEMATICS",date:"04/07/26"},
+{code:"ENG-02",name:"ENGLISH",date:"05/07/26"},
+{code:"HIN-02",name:"HINDI",date:"06/07/26"},
+{code:"EVS-02",name:"ENVIRONMENTAL STUDIES",date:"08/07/26"},
+{code:"COMP-02",name:"COMPUTER EDUCATION",date:"09/07/26"}
+],
+
+"3":[
+{code:"SC-03",name:"GENERAL SCIENCE",date:"04/07/26"},
+{code:"MAT-03",name:"MATHEMATICS",date:"05/07/26"},
+{code:"HIN-03",name:"HINDI",date:"06/07/26"},
+{code:"SST-03",name:"SOCIAL STUDIES",date:"07/07/26"},
+{code:"ENG-03",name:"ENGLISH",date:"08/07/26"},
+{code:"COMP-03",name:"COMPUTER EDUCATION",date:"09/07/26"}
+],
+
+"4":[
+{code:"HIN-04",name:"HINDI",date:"04/07/26"},
+{code:"MAT-04",name:"MATHEMATICS",date:"05/07/26"},
+{code:"COMP-04",name:"COMPUTER EDUCATION",date:"07/07/26"},
+{code:"ENG-04",name:"ENGLISH",date:"08/07/26"},
+{code:"SST-04",name:"SOCIAL STUDIES",date:"09/07/26"}
+],
+
+"5":[
+{code:"MAT-05",name:"MATHEMATICS",date:"04/07/26"},
+{code:"HIN-05",name:"HINDI",date:"05/07/26"},
+{code:"ENG-05",name:"ENGLISH",date:"06/07/26"},
+{code:"SST-05",name:"SOCIAL STUDIES",date:"07/07/26"},
+{code:"SC-05",name:"GENERAL SCIENCE",date:"08/07/26"},
+{code:"COMP-05",name:"COMPUTER EDUCATION",date:"09/07/26"}
+],
+
+"6":[
+{code:"SENG-06",name:"ENGLISH",date:"04/07/26"},
+{code:"SHIN-06",name:"HINDI",date:"05/07/26"},
+{code:"SSC-06",name:"SCIENCE",date:"06/07/26"},
+{code:"SSST-06",name:"SOCIAL STUDIES",date:"08/07/26"},
+{code:"SCOMP-06",name:"COMPUTER EDUCATION",date:"09/07/26"},
+{code:"SMAT-06",name:"MATHEMATICS",date:"11/07/26"}
+],
+
+"7":[
+{code:"SMAT-07",name:"MATHEMATICS",date:"04/07/26"},
+{code:"SENG-07",name:"ENGLISH",date:"05/07/26"},
+{code:"SHIN-07",name:"HINDI",date:"06/07/26"},
+{code:"SSC-07",name:"SCIENCE",date:"08/07/26"},
+{code:"SCOMP-07",name:"COMPUTER EDUCATION",date:"09/07/26"},
+{code:"SSST-07",name:"SOCIAL STUDIES",date:"11/07/26"}
+],
+
+"8":[
+{code:"SSC-08",name:"SCIENCE",date:"04/07/26"},
+{code:"SMAT-08",name:"MATHEMATICS",date:"05/07/26"},
+{code:"SSST-08",name:"SOCIAL STUDIES",date:"07/07/26"},
+{code:"SHIN-08",name:"HINDI",date:"08/07/26"},
+{code:"SENG-08",name:"ENGLISH",date:"09/07/26"}
+],
+
+"9":[
+{code:"SHIN-09",name:"HINDI",date:"04/07/26"},
+{code:"SMAT-09",name:"MATHEMATICS",date:"05/07/26"},
+{code:"SSC-09",name:"SCIENCE",date:"06/07/26"},
+{code:"SENG-09",name:"ENGLISH",date:"08/07/26"},
+{code:"SSST-09",name:"SOCIAL STUDIES",date:"09/07/26"}
+],
+
+"10":[
+{code:"SMAT-09",name:"MATHEMATICS",date:"04/07/26"},
+{code:"SHIN-09",name:"HINDI",date:"05/07/26"},
+{code:"SENG-09",name:"ENGLISH",date:"06/07/26"},
+{code:"SSST-09",name:"SOCIAL STUDIES",date:"07/07/26"},
+{code:"SSC-09",name:"SCIENCE",date:"08/07/26"}
+],
+
+"11-NM":[
+{code:"SSPHY-11",name:"PHYSICS",date:"04/07/26"},
+{code:"SSCHEM-11",name:"CHEMISTRY",date:"05/07/26"},
+{code:"SSMAT-11",name:"MATHEMATICS",date:"07/07/26"},
+{code:"SSENG-11",name:"ENGLISH",date:"08/07/26"}
+],
+
+"11-COM":[
+{code:"SSBST-11",name:"BUSINESS STUDIES",date:"04/07/26"},
+{code:"SSACC-11",name:"ACCOUNTANCY",date:"05/07/26"},
+{code:"SSECO-11",name:"ECONOMICS",date:"07/07/26"},
+{code:"SSENG-11",name:"ENGLISH",date:"08/07/26"}
+],
+
+"11-HUM":[
+{code:"SSGEO-11",name:"GEOGRAPHY",date:"04/07/26"},
+{code:"SSPSC-11",name:"POLITICAL SCIENCE",date:"05/07/26"},
+{code:"SSHIS-11",name:"HISTORY",date:"06/07/26"},
+{code:"SSECO-11",name:"ECONOMICS",date:"07/07/26"},
+{code:"SSENG-11",name:"ENGLISH",date:"08/07/26"}
+],
+
+"12-NM":[
+{code:"SSCHEM-12",name:"CHEMISTRY",date:"04/07/26"},
+{code:"SSMAT-12",name:"MATHEMATICS",date:"05/07/26"},
+{code:"SSPHY-12",name:"PHYSICS",date:"06/07/26"},
+{code:"SSENG-12",name:"ENGLISH",date:"09/07/26"}
+],
+
+"12-COM":[
+{code:"SSACC-12",name:"ACCOUNTANCY",date:"04/07/26"},
+{code:"SSECO-12",name:"ECONOMICS",date:"05/07/26"},
+{code:"SSBST-12",name:"BUSINESS STUDIES",date:"06/07/26"},
+{code:"SSENG-12",name:"ENGLISH",date:"09/07/26"}
+],
+
+"12-HUM":[
+{code:"SSPSC-12",name:"POLITICAL SCIENCE",date:"04/07/26"},
+{code:"SSECO-12",name:"ECONOMICS",date:"05/07/26"},
+{code:"SSHIS-12",name:"HISTORY",date:"08/07/26"},
+{code:"SSENG-12",name:"ENGLISH",date:"09/07/26"}
+]
+
+};
+
+
+const optionalSubjects = {
+
+"6":[
+{code:"SSKT-06",name:"SANSKRIT",date:"07/07/26"},
+{code:"SPUNJ-06",name:"PUNJABI",date:"07/07/26"}
+],
+
+"7":[
+{code:"SSKT-07",name:"SANSKRIT",date:"07/07/26"},
+{code:"SPUNJ-07",name:"PUNJABI",date:"07/07/26"}
+],
+
+"8":[
+{code:"SSKT-08",name:"SANSKRIT",date:"06/07/26"},
+{code:"SPUNJ-08",name:"PUNJABI",date:"06/07/26"},
+{code:"SAI-08",name:"ARTIFICIAL INTELLIGENCE",date:"11/07/26"},
+{code:"SROB-08",name:"ROBOTICS EDUCATION",date:"11/07/26"}
+],
+
+"9":[
+{code:"SSKT-09",name:"SANSKRIT",date:"11/07/26"},
+{code:"SPUNJ-09",name:"PUNJABI",date:"11/07/26"},
+{code:"SAI-09",name:"ARTIFICIAL INTELLIGENCE",date:"07/07/26"},
+{code:"SROB-09",name:"ROBOTICS EDUCATION",date:"07/07/26"}
+],
+
+"10":[
+{code:"SAI-09",name:"ARTIFICIAL INTELLIGENCE",date:"11/07/26"},
+{code:"SROB-09",name:"ROBOTICS EDUCATION",date:"11/07/26"}
+],
+
+"11-NM":[
+{code:"SSHMUS-11",name:"HINDUSTANI MUSIC",date:"09/07/26"},
+{code:"SSPED-11",name:"PHYSICAL EDUCATION",date:"09/07/26"},
+{code:"SSROB-11",name:"ROBOTICS",date:"09/07/26"},
+{code:"SSAI-11",name:"ARTIFICIAL INTELLIGENCE",date:"09/07/26"},
+{code:"SSIPR-11",name:"INFORMATION PRACTICES",date:"09/07/26"}
+],
+
+"11-COM":[
+{code:"SSHMUS-11",name:"HINDUSTANI MUSIC",date:"09/07/26"},
+{code:"SSPED-11",name:"PHYSICAL EDUCATION",date:"09/07/26"},
+{code:"SSROB-11",name:"ROBOTICS",date:"09/07/26"},
+{code:"SSAI-11",name:"ARTIFICIAL INTELLIGENCE",date:"09/07/26"},
+{code:"SSIPR-11",name:"INFORMATION PRACTICES",date:"09/07/26"},
+{code:"SSMAT-11",name:"MATHEMATICS",date:"07/07/26"}
+],
+
+"11-HUM":[
+{code:"SSHMUS-11",name:"HINDUSTANI MUSIC",date:"09/07/26"},
+{code:"SSPED-11",name:"PHYSICAL EDUCATION",date:"09/07/26"},
+{code:"SSROB-11",name:"ROBOTICS",date:"09/07/26"},
+{code:"SSAI-11",name:"ARTIFICIAL INTELLIGENCE",date:"09/07/26"},
+{code:"SSIPR-11",name:"INFORMATION PRACTICES",date:"09/07/26"},
+{code:"SSMAT-11",name:"MATHEMATICS",date:"07/07/26"}
+],
+
+"12-NM":[
+{code:"SSHMUS-12",name:"HINDUSTANI MUSIC",date:"07/07/26"},
+{code:"SSPED-12",name:"PHYSICAL EDUCATION",date:"07/07/26"},
+{code:"SSROB-12",name:"ROBOTICS",date:"07/07/26"},
+{code:"SSAI-12",name:"ARTIFICIAL INTELLIGENCE",date:"07/07/26"},
+{code:"SSIPR-12",name:"INFORMATION PRACTICES",date:"07/07/26"}
+],
+
+"12-COM":[
+{code:"SSHMUS-12",name:"HINDUSTANI MUSIC",date:"07/07/26"},
+{code:"SSPED-12",name:"PHYSICAL EDUCATION",date:"07/07/26"},
+{code:"SSROB-12",name:"ROBOTICS",date:"07/07/26"},
+{code:"SSAI-12",name:"ARTIFICIAL INTELLIGENCE",date:"07/07/26"},
+{code:"SSIPR-12",name:"INFORMATION PRACTICES",date:"07/07/26"},
+{code:"SSMAT-12",name:"MATHEMATICS",date:"05/07/26"}
+],
+
+"12-HUM":[
+{code:"SSHMUS-12",name:"HINDUSTANI MUSIC",date:"07/07/26"},
+{code:"SSPED-12",name:"PHYSICAL EDUCATION",date:"07/07/26"},
+{code:"SSROB-12",name:"ROBOTICS",date:"07/07/26"},
+{code:"SSAI-12",name:"ARTIFICIAL INTELLIGENCE",date:"07/07/26"},
+{code:"SSIPR-12",name:"INFORMATION PRACTICES",date:"07/07/26"},
+{code:"SSMAT-12",name:"MATHEMATICS",date:"05/07/26"}
+]
+
+};
+
+
+function handleClass(){
+
+const cls = document.getElementById('studentClass').value;
+
+const optionalBox = document.getElementById('optionalBox');
+
+const optionalContainer = document.getElementById('optionalContainer');
+
+optionalContainer.innerHTML='';
+
+if(optionalSubjects[cls]){
+
+optionalBox.style.display='block';
+
+optionalSubjects[cls].forEach(sub=>{
+
+optionalContainer.innerHTML += `
+
+<div class="check-item">
+
+<input type="radio" value='${JSON.stringify(sub)}' name="optional">
+
+${sub.name}
+
+</div>
+
+`;
+
+});
+
+}else{
+
+optionalBox.style.display='none';
+
+}
+
+}
+
+
+
+function generateAdmitCard(){
+
+const name = document.getElementById('studentName').value;
+
+const roll = document.getElementById('rollNumber').value;
+
+const admission = document.getElementById('admissionNumber').value;
+
+const phone = document.getElementById('phoneNumber').value;
+
+const cls = document.getElementById('studentClass').value;
+
+if(!name || !roll || !admission || !phone || !cls){
+
+alert('Please fill all details');
+
+return;
+
+}
+
+document.getElementById('printName').innerText=name;
+
+document.getElementById('printRoll').innerText=roll;
+
+document.getElementById('printAdmission').innerText=admission;
+
+document.getElementById('printPhone').innerText=phone;
+
+let finalSubjects=[...subjects[cls]];
+
+const checked=document.querySelectorAll('input[name="optional"]:checked');
+
+checked.forEach(item=>{
+
+finalSubjects.push(JSON.parse(item.value));
+
+});
+
+finalSubjects.sort((a,b)=>{
+
+return new Date(a.date.split('/').reverse().join('-')) -
+
+new Date(b.date.split('/').reverse().join('-'));
+
+});
+
+let rows='';
+
+finalSubjects.forEach(sub=>{
+
+rows += `
+
+<tr>
+
+<td>${sub.code}</td>
+
+<td>${sub.name}</td>
+
+<td>${sub.date}</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById('subjectRows').innerHTML=rows;
+
+document.getElementById('admitCard').style.display='block';
+
+document.getElementById('downloadBtn').style.display='block';
+
+window.scrollTo({
+
+top:document.body.scrollHeight,
+
+behavior:'smooth'
+
+});
+
+}
+
+
+
+async function downloadPDF(){
+
+const { jsPDF } = window.jspdf;
+
+const card=document.getElementById('admitCard');
+
+const canvas=await html2canvas(card,{scale:2});
+
+const imgData=canvas.toDataURL('image/png');
+
+const pdf=new jsPDF('p','mm','a4');
+
+const width=210;
+
+const height=(canvas.height*width)/canvas.width;
+
+pdf.addImage(imgData,'PNG',0,0,width,height);
+
+pdf.save('SDPSDJ_ADMIT_CARD');
+
+}
+
+</script>
+
+
+</body></html>
